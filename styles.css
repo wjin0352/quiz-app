@@ -1,0 +1,61 @@
+/* CLEAR FIX  */
+  /*(use .clear-fix class to clear any floated elements)*/
+/*    .clear-fix:before, .clear-fix:after {
+      content: "";
+      display: table;
+    }
+
+    .clear-fix:after {
+      clear: both;
+    }
+
+    .clear-fix {
+      clear: both;
+    }*/
+
+html {
+  font-family: 'Indie Flower', cursive;
+}
+
+div {
+  border: 0.01em solid grey;
+}
+
+/* Main section contents */
+  .main-section {
+    border: 0.01em solid blue;
+    height: 1000px;
+    margin: 2%;
+  }
+
+  /* main section background */
+    .main-section {
+      background-image: url("./images/melt_down.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+  /* question section */
+    .question-section {
+      height: 40%;
+      width: 40%;
+      border: 0.3em solid black;
+      margin: 3%;
+      background-color: white;
+      border-radius: 15px;
+    }
+
+    hr {
+      height: 22px;
+      border-bottom: 3px solid black;
+      border-top: 0px;
+    }
+
+    .question-section p {
+      font-size: 2em;
+      font-weight: bold;
+
+    }
+
+
+  /* icon section */
