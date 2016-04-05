@@ -24,7 +24,8 @@ div {
 /* Main section contents */
   .main-section {
     border: 0.01em solid blue;
-    height: 1000px;
+    height: 90%;
+    width: 96%;
     margin: 2%;
   }
 
