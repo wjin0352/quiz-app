@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var questionArray = [
+  questionArray = [
     {
       q: "In which town do the Simpsons reside?",
       choices: ['springfield', 'shelbyville', 'seinfeld'],
@@ -30,50 +30,61 @@ $(document).ready(function() {
   var Quiz = {
     rightAnswers: 0,
     currentQuestion: 0,
-    askQuestion: function(){
-      var answerIndex = 0;
-      // question is the hash object inside the array
-      var question = questionArray[this.currentQuestion];
+    introScreen: function() {
+      // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
+      question = questionArray[0];
 
-      // sets the question to question.q from our array hash
+      // SETS THE MAIN QUESTION
       $('#questions').text(question.q);
 
-      // answerTitle is the text in the span.answer tag
-      var answerTitle = $('span.answer').text();
+      // SETS ANSWERS FOR THE QUESTION
+      $('#ans1').text(question.choices[0]);
+      $('#ans2').text(question.choices[1]);
+      $('#ans3').text(question.choices[2]);
+    },
+    askQuestion: function() {
+      // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
+      question = questionArray[this.currentQuestion];
 
-      // console.log(this.currentQuestion);
-      // this sets each span with the answers text
-      // answerIndex = this.currentQuestion % question.choices.length;
-      // console.log(answerIndex);
+      // SETS THE MAIN QUESTION
+      $('#questions').text(question.q);
 
+      // SETS ANSWERS FOR THE QUESTION
       $('#ans1').text(question.choices[0]);
       $('#ans2').text(question.choices[1]);
       $('#ans3').text(question.choices[2]);
 
+      // INCREMENTS TO GET NEXT QUESTION IN THE ARRAY OBJECT
       this.currentQuestion++;
-
-      // this.getResults(question);
     },
     getResults: function() {
+      // console.log(this.currentQuestion);
+      // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = $("input[type='radio']:checked").val();
-      console.log(this);
-      console.log(question.ans + ' is the value of the result');
+
+      // console.log(this);
+      // console.log(question);
+      console.log(result + ' is the value of the result');
       // if (result == $(obj)) {
       //   console.log('win');
       // }
+      this.askQuestion();
     }
   }
 
-  // var game = Object.create(Quiz);
-  Quiz.askQuestion();
+  // SHOW FIRST QUESTION AND ANSWERS
+    Quiz.introScreen();
 
-  // game.askQuestion();
+  // CLICK EVENT FOR BUTTON
+    $('.btn').on('click', function() {
+      Quiz.getResults();
+      // or should i do this?
+      /*  $('form').on('click','.btn', function() {
+        Quiz.getResults();
+      });  */
+    });
 
-  $('.btn').on('click', function() {
-    Quiz.askQuestion();
 
-    Quiz.getResults();
-  });
 
 
 
