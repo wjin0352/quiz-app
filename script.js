@@ -52,25 +52,27 @@ $(document).ready(function() {
 
       this.currentQuestion++;
 
-      this.getResults(question);
+      // this.getResults(question);
     },
-    getResults: function(obj) {
+    getResults: function() {
       var result = $("input[type='radio']:checked").val();
-      // console.log(result);
-      // console.log(obj.q);
-      // if result == $()
+      console.log(this);
+      console.log(question.ans + ' is the value of the result');
+      // if (result == $(obj)) {
+      //   console.log('win');
+      // }
     }
   }
 
-  var game = Object.create(Quiz);
+  // var game = Object.create(Quiz);
+  Quiz.askQuestion();
 
-
-  game.askQuestion();
+  // game.askQuestion();
 
   $('.btn').on('click', function() {
-    game.askQuestion();
-    // console.log(game);
-    game.getResults(game.question);
+    Quiz.askQuestion();
+
+    Quiz.getResults();
   });
 
 
