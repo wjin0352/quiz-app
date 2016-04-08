@@ -1,4 +1,4 @@
-html {
+body {
   font-family: 'Indie Flower', cursive;
 }
 
@@ -24,21 +24,21 @@ div {
 /* Main section contents */
   .main-section {
     border: 0.01em solid blue;
-    height: 90%;
-    width: 96%;
+    height: 900px;
+    /*width: 90%;*/
     margin: 2%;
   }
 
   /* main section background */
     .main-section {
-      background-image: url("./images/melt_down.jpg");
-      background-repeat: no-repeat;
+      background: url("./images/melt_down.jpg") no-repeat center center fixed;
       background-size: cover;
+      /*background-size: 100% 100%;*/
     }
 
   /* question section */
     .question-section {
-      height: 67%;
+      height: 62%;
       width: 26%;
       border: 0.3em solid black;
       margin: 3%;
@@ -71,7 +71,42 @@ div {
       padding-left: 20px;
     }
 
-  /* icon section */
+  /* radio button section .input-choices */
+    .input-choices {
+      border-top: 0.01em solid grey;
+      height: 65%;
+      width: 100%;
+      margin-top: 15%;
+    }
+
+    input {
+      display: inline-block;
+      padding-bottom: 2%;
+
+    }
+
+    input[type="radio"] {
+      margin-left: 44%;
+    }
+
+    span {
+      padding: 10% 0% 10% 2%;
+      display: block;
+      font-size: 1.5em;
+    }
+
+    .btn {
+      display: block;
+    }
+
+
+
+
+
+
+
+
+
 
 
   /* popup modal */

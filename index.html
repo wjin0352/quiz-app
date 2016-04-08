@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
   <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
   <title>Quiz App</title>
@@ -9,13 +10,18 @@
 <body>
   <div class="main-section">
     <div class="question-section"><hr>
-      <p>DID you know? something something something
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit ullam, saepe amet architecto cumque tempora numquam mollitia ea, explicabo ipsam quis nisi dicta repellat ex aliquam iure molestias facilis ratione.</p>
-      <form action="">
-        <input type="radio" >
-        <input type="radio">
-        <input type="radio">
-      </form>
+      <p id="questions"></p>
+      <div class="input-choices">
+        <form action="">
+          <input type="radio" name="option" id="q1" value="0">
+          <span class="answer" id="ans1">ans1</span>
+          <input type="radio" name="option" id="q2" value="1">
+          <span class="answer" id="ans2">ans2</span>
+          <input type="radio" name="option" id="q3" value="2">
+          <span class="answer" id="ans3">ans3</span>
+          <input type="button" value="submit" class="btn btn-lg btn-default">
+        </form>
+      </div>
     </div>
 
     <div class="icon-section"></div>
