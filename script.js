@@ -62,15 +62,44 @@ $(document).ready(function() {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = $("input[type='radio']:checked").val();
 
-      // console.log(this);
-      // console.log(question);
-      console.log(result + ' is the value of the result');
-      // if (result == $(obj)) {
-      //   console.log('win');
-      // }
+      // console.log(result + ' is the value of the result');
+      if (result == question.ans) {
+        console.log(question.choices[result] + ' is a right answer!');
+        // this.showModalCorrect();
+        $('.new').append(correct_html);
+        // console.log(correct_html);
+        this.showModalCorrect();
+      } else {
+        console.log(question.choices[result] + ' is a wrong answer!');
+        $('.new').append(wrong_html);
+        this.showModalIncorrect();
+      };
+
       this.askQuestion();
+    },
+    showModalCorrect: function() {
+      $(".popup").fadeIn(1000);
+      this.hideModal();
+    },
+    showModalIncorrect: function() {
+      $(".popup").fadeIn(1000);
+      this.hideModal();
+    },
+    hideModal: function() {
+      $('[data-popup-close]').on('click', function(e) {
+        $(".popup").fadeOut(1000);
+        e.preventDefault();
+      })
+
     }
   }
+
+  correct_html = '<div class="popup" data-popup="popup-1"><div class="popup-correct"><h2>Good job, that is correct!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>'
+
+  wrong_html = '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>'
+  // right answer modal
+    // right-modal =
+  // wrong answer modal
 
   // SHOW FIRST QUESTION AND ANSWERS
     Quiz.introScreen();
@@ -86,34 +115,24 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
 // ----------------------------------------------
   /* modal feature */
-  $(function() {
-    // OPEN---- modal
-    $('[data-popup-open]').on('click', function(e) {
-      var targeted_popup_class = $(this).attr('data-popup-open');
-      $('[data-popup="' + targeted_popup_class + '"]').fadeIn(1000);
+  // $(function() {
+  //   // OPEN---- modal
+  //   $('[data-popup-open]').on('click', function(e) {
+  //     var targeted_popup_class = $(this).attr('data-popup-open');
+  //     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(1000);
 
-      e.preventDefault();
-    });
+  //     e.preventDefault();
+  //   });
 
-    // CLOSE---- modal
+  //   // CLOSE---- modal
     $('[data-popup-close]').on('click', function(e) {
-      var targeted_popup_class = $(this).attr('data-popup-close');
-      $('[data-popup="' + targeted_popup_class + '"]').fadeOut(1000);
+
+      $('.popup').fadeOut(1000);
 
       e.preventDefault();
     });
-  });
+  // });
 });
 

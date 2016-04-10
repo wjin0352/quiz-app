@@ -102,13 +102,6 @@ div {
 
 
 
-
-
-
-
-
-
-
   /* popup modal */
     /* Outer */
     .popup {
@@ -118,7 +111,7 @@ div {
         position:fixed;
         top:0px;
         left:0px;
-        background:rgba(0,0,0,0.75);
+        background:rgba(0,0,0,0.5);
     }
 
     /* Inner */
@@ -134,9 +127,9 @@ div {
       box-shadow:0px 2px 6px rgba(0,0,0,1);
       border-radius:3px;
       background:#fff;
-      background-image: url("./images/homer_sloth.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
+      /*background-image: url("./images/homer_sloth.jpg");*/
+      /*background-repeat: no-repeat;*/
+      /*background-size: cover;*/
     }
 
     /* Close Button */
@@ -165,4 +158,21 @@ div {
         transform:translate(50%, -50%) rotate(180deg);
         background:rgba(0,0,0,1);
         text-decoration:none;
+    }
+
+     .popup-correct, .popup-incorrect {
+      width:50%;
+      height:50%;
+      padding:40px;
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform:translate(-50%, -50%);
+      transform:translate(-50%, -50%);
+      box-shadow:0px 2px 6px rgba(0,0,0,1);
+      border-radius:3px;
+      background:#fff;
+      /*background-image: url("./images/homer_sloth.jpg");*/
+      /*background-repeat: no-repeat;*/
+      /*background-size: cover;*/
     }
