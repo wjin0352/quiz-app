@@ -40,6 +40,11 @@ $(document).ready(function() {
       $('#questions').text(this.question.q);
 
       // SETS ANSWERS FOR THE QUESTION
+      for(var i=0; i<this.question.choices.length; i++) {
+        console.log(this.question.choices[i]);
+
+      }
+
       $('#ans1').text(this.question.choices[0]);
       $('#ans2').text(this.question.choices[1]);
       $('#ans3').text(this.question.choices[2]);
