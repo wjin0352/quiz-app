@@ -31,8 +31,10 @@ $(document).ready(function() {
     rightAnswers: 0,
     currentQuestion: 0,
     donut_gif: '<div class="donut"><img src="./images/donut-simpson.gif" alt="donut" style="width:120px;height:200px;"></img></div>',
+    flanders_pissed: '<div class="flanders"><img src="./images/Nedpissed.gif" alt="flanders pissed" ></img>',
     correct_html: '<div class="popup" data-popup="popup-1"><div class="popup-correct"><h2>Good job, that is correct!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     wrong_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
+    warning_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Please click on one of the choices!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     askQuestion: function() {
       // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
       this.question = questionArray[this.currentQuestion];
@@ -70,13 +72,13 @@ $(document).ready(function() {
       this.currentQuestion++;
     },
     validateRadioButton: function() {
-       valid = true;
-      var radio = $('form');
-        if (!(radio[0].checked || radio[1].checked || radio[2].checked)) {
-            valid = false;
-        }
-      console.log(valid);
-        return valid;
+      //  valid = true;
+      // var radio = $('form');
+      //   if (!(radio[0].checked || radio[1].checked || radio[2].checked)) {
+      //       valid = false;
+      //   }
+      // console.log(valid);
+      //   return valid;
     },
     // CLICK EVENT FOR BUTTON
     clickButton: function() {
@@ -84,7 +86,7 @@ $(document).ready(function() {
         Quiz.getResults();
       });
     },
-    getResults: function() {
+    getResults: function(e) {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = parseInt($("input[type='radio']:checked").val(),10);
 
@@ -95,18 +97,29 @@ $(document).ready(function() {
       //   console.log(result);
       //   alert('Please click on a choice.')
       // }
-      if (result === this.question.ans) {
+       if (result === this.question.ans) {
         $('.new').append(this.correct_html);
         this.showModal();
         this.appendDonut();
         this.playMusic('woohoo');
-        this.validateRadioButton();
+        $('#q').attr('checked', false);
+        // this.validateRadioButton();
+      } else if (isNaN(result)) {
+        $('.new').append(this.warning_html);
+        this.showModal();
+        alert('wtf?'); // how come my alert dont work!
+        console.log(result + " WTF is going on!");
+        this.playMusic('flanders');
+        $('.popup h2').append(this.flanders_pissed);
+        $('#q').attr('checked', false);
+        e.preventDefault();
       } else if (result != this.question.ans) {
         console.log(result + " wrong answer");
         $('.new').append(this.wrong_html);
         this.showModal();
         this.playMusic('doh');
-        this.validateRadioButton();
+        $('#q').attr('checked', false);
+        // this.validateRadioButton();
         // console.log(result);
       }
 
@@ -125,6 +138,9 @@ $(document).ready(function() {
     appendDonut: function() {
       $('.popup-correct').append(this.donut_gif);
     },
+    clearRadioBox: function() {
+      $('#q').attr('checked', false);
+    },
     playMusic: function(id) {
     $('#'+id)[0].volume = 0.5;
     $('#'+id)[0].load();
@@ -135,7 +151,6 @@ $(document).ready(function() {
   // SHOW FIRST QUESTION AND ANSWERS
 
     Quiz.askQuestion();
-
 
     Quiz.clickButton();
 
