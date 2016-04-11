@@ -30,6 +30,7 @@ $(document).ready(function() {
   var Quiz = {
     rightAnswers: 0,
     currentQuestion: 0,
+    donut_gif: '<div class="donut"><img src="./images/donut-simpson.gif" alt="donut" style="width:120px;height:200px;"></img></div>',
     correct_html: '<div class="popup" data-popup="popup-1"><div class="popup-correct"><h2>Good job, that is correct!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     wrong_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     askQuestion: function() {
@@ -40,10 +41,26 @@ $(document).ready(function() {
       $('#questions').text(this.question.q);
 
       // SETS ANSWERS FOR THE QUESTION
-      for(var i=0; i<this.question.choices.length; i++) {
-        console.log(this.question.choices[i]);
+      // for(var i=0; i<this.question.choices.length; i++) {
+      //   console.log(this.question.choices[i]);
 
-      }
+      // }
+      var spanAns = $('span.answer');
+      // console.log($('span.answer').text());
+
+      $('body').each(function(index, value){
+        // console.log(spanAns);
+        // console.log($(this).text());
+
+      });
+
+      // console.log($('.answer').length);
+      // $.each(spanAns, function(index, value) {
+        // console.log(index +" " + value);
+        // spanAns.text(this.question);
+        // console.log(questionArray[index].choices[index]);
+
+      // });
 
       $('#ans1').text(this.question.choices[0]);
       $('#ans2').text(this.question.choices[1]);
@@ -52,17 +69,46 @@ $(document).ready(function() {
       // INCREMENTS TO GET NEXT QUESTION IN THE ARRAY OBJECT
       this.currentQuestion++;
     },
+    validateRadioButton: function() {
+       valid = true;
+      var radio = $('form');
+        if (!(radio[0].checked || radio[1].checked || radio[2].checked)) {
+            valid = false;
+        }
+      console.log(valid);
+        return valid;
+    },
+    // CLICK EVENT FOR BUTTON
+    clickButton: function() {
+      $('.btn').on('click', function(){
+        Quiz.getResults();
+      });
+    },
     getResults: function() {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
-      var result = +$("input[type='radio']:checked").val();
+      var result = parseInt($("input[type='radio']:checked").val(),10);
 
-      if (result == this.question.ans) {
+      // if (!$("input[name='html_elements']:checked").val())
+      // if(!document.getElementById('rdoPaid').checked
+      // if (!$("input[type='radio']").checked) {
+      //   this.playMusic('duffmanbad');
+      //   console.log(result);
+      //   alert('Please click on a choice.')
+      // }
+      if (result === this.question.ans) {
         $('.new').append(this.correct_html);
         this.showModal();
-      } else {
+        this.appendDonut();
+        this.playMusic('woohoo');
+        this.validateRadioButton();
+      } else if (result != this.question.ans) {
+        console.log(result + " wrong answer");
         $('.new').append(this.wrong_html);
         this.showModal();
-      };
+        this.playMusic('doh');
+        this.validateRadioButton();
+        // console.log(result);
+      }
 
       this.askQuestion();
     },
@@ -75,6 +121,14 @@ $(document).ready(function() {
         $(".popup").fadeOut(1000);
         e.preventDefault();
       });
+    },
+    appendDonut: function() {
+      $('.popup-correct').append(this.donut_gif);
+    },
+    playMusic: function(id) {
+    $('#'+id)[0].volume = 0.5;
+    $('#'+id)[0].load();
+    $('#'+id)[0].play();
     }
   }
 
@@ -82,9 +136,8 @@ $(document).ready(function() {
 
     Quiz.askQuestion();
 
-  // CLICK EVENT FOR BUTTON
-    $('.btn').on('click', function() {
-      Quiz.getResults();
-    });
+
+    Quiz.clickButton();
+
 });
 
