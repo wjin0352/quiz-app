@@ -36,7 +36,7 @@ $(document).ready(function() {
     wrong_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     warning_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Please click on one of the choices!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     askQuestion: function() {
-      $('#q').attr('checked', false);
+      // $('#q').attr('checked', false);
       // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
       this.question = questionArray[this.currentQuestion];
 
@@ -88,7 +88,7 @@ $(document).ready(function() {
     clickButton: function() {
       $('.btn').on('click', function(e){
         Quiz.getResults();
-        $('#q').attr('checked', false);
+        // $('#q').attr('checked', false);
         e.preventDefault();
       });
     },
@@ -96,24 +96,15 @@ $(document).ready(function() {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = parseInt($("input[type='radio']:checked").val(),10);
 
-      // if (!$("input[name='html_elements']:checked").val())
-      // if(!document.getElementById('rdoPaid').checked
-      // if (!$("input[type='radio']").checked) {
-      //   this.playMusic('duffmanbad');
-      //   console.log(result);
-      //   alert('Please click on a choice.')
-      // }
-      $('.q').attr('checked', null);
+      this.clearRadioBox();
 
-       if (result === this.question.ans) {
-
+      if (result === this.question.ans) {
         $('.new').append(this.correct_html);
         this.showModal();
         this.rightAnswers++
         console.log(this.rightAnswers);
         this.appendDonut();
         this.playMusic('woohoo');
-
         // this.validateRadioButton();
       } else if (isNaN(result)) {
 
@@ -150,23 +141,19 @@ $(document).ready(function() {
       });
     },
     appendDonut: function() {
-      // var donut_html = "";
-      // for()
       // $('.popup-correct').append(this.donut_gif);
       // // $('img:last').append(this.donut_gif);
-
-
+      // Appending the image didnt work well, as it overlapped the first image
+      // instead we concatenate the image to a string var, depending on how many correct
+      // answers we have.  Then instead of appending we do html() which changes the html.
       var donut_html = "";
-     for (var i =0; i< this.rightAnswers; i++) {
-       donut_html += this.donut_gif;
-      }
+      for (var i =0; i< this.rightAnswers; i++) {
+        donut_html += this.donut_gif;
+      };
       $('.popup-correct p').html(donut_html);
     },
-    appendNextDonut: function() {
-      $('img:last').append(this.donut_gif);
-    },
     clearRadioBox: function() {
-      $('#q').attr('checked', false);
+      $('.q').attr('checked', null);
     },
     playMusic: function(id) {
     $('#'+id)[0].volume = 0.5;
