@@ -30,68 +30,63 @@ $(document).ready(function() {
   var Quiz = {
     rightAnswers: 0,
     currentQuestion: 0,
+    gameWon: false,
     donut_gif: '<div class="donut"><img src="./images/donut-simpson.gif" alt="donut" style="width:120px;height:200px;"></img></div>',
     flanders_pissed: '<div class="flanders"><img src="./images/Nedpissed.gif" alt="flanders pissed" ></img>',
     correct_html: '<div class="popup" data-popup="popup-1"><div class="popup-correct"><h2>Good job, that is correct!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     wrong_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     warning_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Please click on one of the choices!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
+    winner_html: '<div class="popup" data-popup="popup-1"><div class="popup-winner"><h2>Congrats you won!!!</h2><p><a id="closer" data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
+    prompt_html: '<div class="popup" data-popup="popup-1"><div class="popup-prompt"><h2>play again?</h2><p><a type="button" class="btn btn-lrg btn-warning">OK</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     askQuestion: function() {
       // $('#q').attr('checked', false);
       // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
       this.question = questionArray[this.currentQuestion];
       // console.log(this.question);
 
-      // SETS THE MAIN QUESTION
+      // SETS THE MAIN QUESTION of current object from array
       $('#questions').text(this.question.q);
 
+      // Loops through all span.answer elements and using each iterates through to set the answer choices of current object from the array
       var question = this.question;
-
       $('span.answer').each(function(index) {
         $(this).text(question.choices[index]);
       });
 
-      // $('#ans1').text(this.question.choices[0]);
-      // $('#ans2').text(this.question.choices[1]);
-      // $('#ans3').text(this.question.choices[2]);
-
-      // INCREMENTS TO GET NEXT QUESTION IN THE ARRAY OBJECT
+      // INCREMENTS to make sure we get to the next object in the array
       this.currentQuestion++;
     },
-    validateRadioButton: function() {
-      //  valid = true;
-      // var input = $('form');
-      // // if length = 0
-      //   if (!(input[type="radio:checked"] == 1) {
-      //       valid = false;
-      //   }
-      // console.log(valid);
-      //   return valid;
-    },
-    // CLICK EVENT FOR BUTTON
+    // CLICK EVENT FOR SUBMIT BUTTON
     clickButton: function() {
       $('.btn').on('click', function(e){
         Quiz.getResults();
-        // $('#q').attr('checked', false);
         e.preventDefault();
       });
     },
+    // setTimeout: function () {
+
+    // },
     getResults: function(e) {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = parseInt($("input[type='radio']:checked").val(),10);
 
       this.clearRadioBox();
 
-      if (result === this.question.ans) {
+      if (this.rightAnswers === 1) {
+        $('.new').append(this.winner_html);
+        this.showModal();
+        this.appendDonut();
+        this.playMusic('rich');
+        this.gameWon = true;
+      } else if (result === this.question.ans) {
         $('.new').append(this.correct_html);
         this.showModal();
         this.rightAnswers++
         this.appendDonut();
         this.playMusic('woohoo');
-        // this.validateRadioButton();
       } else if (isNaN(result)) {
         $('.new').append(this.warning_html);
         this.showModal();
-        alert('wtf?'); // how come my alert dont work!
         this.playMusic('flanders');
         $('.popup h2').append(this.flanders_pissed);
         e.preventDefault();
@@ -99,7 +94,25 @@ $(document).ready(function() {
         $('.new').append(this.wrong_html);
         this.showModal();
         this.playMusic('doh');
-      }
+      };
+
+      // asks the next question
+      console.log(this.rightAnswers);
+      console.log(this.currentQuestion);
+      this.gameWon == true ? this.startGame() : this.askQuestion();
+    },
+    // promptUser: function () {
+    //   $('.new').append(this.prompt_html);
+    //   this.showModal().delay(3000);
+    //   $('.btn-warning').on('click', function(e) {
+    //     this.startGame();
+    //     e.preventDefault();
+    //   });
+    // },
+    startGame: function () {
+      this.rightAnswers = 0;
+      this.currentQuestion = 0;
+      this.gameWon = false;
       this.askQuestion();
     },
     showModal: function() {
@@ -113,15 +126,14 @@ $(document).ready(function() {
       });
     },
     appendDonut: function() {
-      // $('.popup-correct').append(this.donut_gif);
-      // // $('img:last').append(this.donut_gif);
       // Appending the image didnt work well, as it overlapped the first image
-      // instead we concatenate the image to a string var, depending on how many correct
-      // answers we have.  Then instead of appending we do html() which changes the html.
+      // instead we concatenate the image to a string var, looping and depending on how many correct
+      // answers we have. Then instead of using append() we do html() which changes the html.
       var donut_html = "";
       for (var i =0; i< this.rightAnswers; i++) {
         donut_html += this.donut_gif;
       };
+
       $('.popup-correct p').html(donut_html);
     },
     clearRadioBox: function() {
