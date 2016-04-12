@@ -36,6 +36,7 @@ $(document).ready(function() {
     wrong_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     warning_html: '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Please click on one of the choices!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>',
     askQuestion: function() {
+      $('#q').attr('checked', false);
       // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
       this.question = questionArray[this.currentQuestion];
 
@@ -64,6 +65,8 @@ $(document).ready(function() {
 
       // });
 
+
+
       $('#ans1').text(this.question.choices[0]);
       $('#ans2').text(this.question.choices[1]);
       $('#ans3').text(this.question.choices[2]);
@@ -73,8 +76,9 @@ $(document).ready(function() {
     },
     validateRadioButton: function() {
       //  valid = true;
-      // var radio = $('form');
-      //   if (!(radio[0].checked || radio[1].checked || radio[2].checked)) {
+      // var input = $('form');
+      // // if length = 0
+      //   if (!(input[type="radio:checked"] == 1) {
       //       valid = false;
       //   }
       // console.log(valid);
@@ -82,8 +86,10 @@ $(document).ready(function() {
     },
     // CLICK EVENT FOR BUTTON
     clickButton: function() {
-      $('.btn').on('click', function(){
+      $('.btn').on('click', function(e){
         Quiz.getResults();
+        $('#q').attr('checked', false);
+        e.preventDefault();
       });
     },
     getResults: function(e) {
@@ -97,28 +103,35 @@ $(document).ready(function() {
       //   console.log(result);
       //   alert('Please click on a choice.')
       // }
+      $('.q').attr('checked', null);
+
        if (result === this.question.ans) {
+
         $('.new').append(this.correct_html);
         this.showModal();
+        this.rightAnswers++
+        console.log(this.rightAnswers);
         this.appendDonut();
         this.playMusic('woohoo');
-        $('#q').attr('checked', false);
+
         // this.validateRadioButton();
       } else if (isNaN(result)) {
+
         $('.new').append(this.warning_html);
         this.showModal();
         alert('wtf?'); // how come my alert dont work!
         console.log(result + " WTF is going on!");
         this.playMusic('flanders');
         $('.popup h2').append(this.flanders_pissed);
-        $('#q').attr('checked', false);
+
         e.preventDefault();
       } else if (result != this.question.ans) {
         console.log(result + " wrong answer");
+
         $('.new').append(this.wrong_html);
         this.showModal();
         this.playMusic('doh');
-        $('#q').attr('checked', false);
+
         // this.validateRadioButton();
         // console.log(result);
       }
@@ -127,6 +140,7 @@ $(document).ready(function() {
     },
     showModal: function() {
       $(".popup").fadeIn(1000);
+      // html inside here from line 118
       this.attachHideModal();
     },
     attachHideModal: function() {
@@ -136,7 +150,20 @@ $(document).ready(function() {
       });
     },
     appendDonut: function() {
-      $('.popup-correct').append(this.donut_gif);
+      // var donut_html = "";
+      // for()
+      // $('.popup-correct').append(this.donut_gif);
+      // // $('img:last').append(this.donut_gif);
+
+
+      var donut_html = "";
+     for (var i =0; i< this.rightAnswers; i++) {
+       donut_html += this.donut_gif;
+      }
+      $('.popup-correct p').html(donut_html);
+    },
+    appendNextDonut: function() {
+      $('img:last').append(this.donut_gif);
     },
     clearRadioBox: function() {
       $('#q').attr('checked', false);

@@ -180,3 +180,8 @@ div {
     .flanders {
       position:absolute;
     }
+
+    div.donut {
+      display: inline-block;
+      padding: 0 20px 0 20px;
+    }
