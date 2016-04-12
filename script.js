@@ -39,37 +39,20 @@ $(document).ready(function() {
       // $('#q').attr('checked', false);
       // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
       this.question = questionArray[this.currentQuestion];
+      // console.log(this.question);
 
       // SETS THE MAIN QUESTION
       $('#questions').text(this.question.q);
 
-      // SETS ANSWERS FOR THE QUESTION
-      // for(var i=0; i<this.question.choices.length; i++) {
-      //   console.log(this.question.choices[i]);
+      var question = this.question;
 
-      // }
-      var spanAns = $('span.answer');
-      // console.log($('span.answer').text());
-
-      $('body').each(function(index, value){
-        // console.log(spanAns);
-        // console.log($(this).text());
-
+      $('span.answer').each(function(index) {
+        $(this).text(question.choices[index]);
       });
 
-      // console.log($('.answer').length);
-      // $.each(spanAns, function(index, value) {
-        // console.log(index +" " + value);
-        // spanAns.text(this.question);
-        // console.log(questionArray[index].choices[index]);
-
-      // });
-
-
-
-      $('#ans1').text(this.question.choices[0]);
-      $('#ans2').text(this.question.choices[1]);
-      $('#ans3').text(this.question.choices[2]);
+      // $('#ans1').text(this.question.choices[0]);
+      // $('#ans2').text(this.question.choices[1]);
+      // $('#ans3').text(this.question.choices[2]);
 
       // INCREMENTS TO GET NEXT QUESTION IN THE ARRAY OBJECT
       this.currentQuestion++;
@@ -102,36 +85,25 @@ $(document).ready(function() {
         $('.new').append(this.correct_html);
         this.showModal();
         this.rightAnswers++
-        console.log(this.rightAnswers);
         this.appendDonut();
         this.playMusic('woohoo');
         // this.validateRadioButton();
       } else if (isNaN(result)) {
-
         $('.new').append(this.warning_html);
         this.showModal();
         alert('wtf?'); // how come my alert dont work!
-        console.log(result + " WTF is going on!");
         this.playMusic('flanders');
         $('.popup h2').append(this.flanders_pissed);
-
         e.preventDefault();
       } else if (result != this.question.ans) {
-        console.log(result + " wrong answer");
-
         $('.new').append(this.wrong_html);
         this.showModal();
         this.playMusic('doh');
-
-        // this.validateRadioButton();
-        // console.log(result);
       }
-
       this.askQuestion();
     },
     showModal: function() {
       $(".popup").fadeIn(1000);
-      // html inside here from line 118
       this.attachHideModal();
     },
     attachHideModal: function() {
