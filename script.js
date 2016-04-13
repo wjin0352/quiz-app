@@ -53,7 +53,6 @@ $(document).ready(function() {
       for (var i =0; i< Model.rightAnswers; i++) {
         donut_html += Model.donut_gif;
       };
-
       $('.popup-correct p').html(donut_html);
     },
     clearRadioBox: function() {
@@ -93,6 +92,7 @@ $(document).ready(function() {
       // INCREMENTS to make sure we get to the next object in the array
       Model.currentQuestion++;
     },
+
     getResults: function(e) {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = parseInt($("input[type='radio']:checked").val(),10);
@@ -122,7 +122,6 @@ $(document).ready(function() {
         View.showModal();
         Quiz.playMusic('doh');
       };
-
       // asks the next question
       console.log(Model.rightAnswers);
       console.log(Model.currentQuestion);
@@ -135,19 +134,11 @@ $(document).ready(function() {
       };
       // this.gameWon == true ? this.startGame() : this.askQuestion();
     },
-    // promptUser: function () {
-    //   $('.new').append(this.prompt_html);
-    //   this.showModal().delay(3000);
-    //   $('.btn-warning').on('click', function(e) {
-    //     this.startGame();
-    //     e.preventDefault();
-    //   });
-    // },
     lostGame: function () {
       console.log('lost game!');
       $('.new').html(Model.loser_html);
       View.showModal();
-      Quiz.playMusic('meltdown')
+      Quiz.playMusic('meltdown');
       Quiz.startGame();
     },
     startGame: function () {
@@ -164,9 +155,7 @@ $(document).ready(function() {
   }
 
   // SHOW FIRST QUESTION AND ANSWERS
-
     Quiz.askQuestion();
-
     View.clickButton();
 
 });
