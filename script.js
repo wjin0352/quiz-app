@@ -72,7 +72,7 @@ $(document).ready(function() {
 
       this.clearRadioBox();
 
-      if (this.rightAnswers === 1) {
+      if (this.rightAnswers === 4) {
         $('.new').append(this.winner_html);
         this.showModal();
         this.appendDonut();
