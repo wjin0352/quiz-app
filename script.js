@@ -147,6 +147,7 @@ $(document).ready(function() {
       console.log('lost game!');
       $('.new').html(Model.loser_html);
       View.showModal();
+      Quiz.playMusic('meltdown')
       Quiz.startGame();
     },
     startGame: function () {
