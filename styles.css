@@ -194,21 +194,40 @@ div {
       background-size: cover;
     }
 
-    .popup-winner h2 {
+    .popup-winner h2, .popup-loser h2 {
       font-size: 3em;
       background-color: white;
       margin: 0 auto;
       width: 350px;
       border-radius: 8px;
+      border: 0.01em solid grey;
     }
 
-    .popup-winner a#closer {
+    .popup-winner a#closer, .popup-loser a#closer {
       font-size: 3em;
       margin: 2% auto;
       width: 6%;
       display: block;
       background-color: white;
       border-radius: 12px;
+      border: 0.01em solid grey;
+    }
+
+    .popup-loser {
+      width:90%;
+      height:90%;
+      padding:40px;
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform:translate(-50%, -50%);
+      transform:translate(-50%, -50%);
+      box-shadow:0px 2px 6px rgba(0,0,0,1);
+      border-radius:3px;
+      background-color: #fff;
+      background-image: url('./images/lose.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
     .popup-prompt {
