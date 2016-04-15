@@ -45,6 +45,9 @@ $(document).ready(function() {
         e.preventDefault();
       });
     },
+    setHTML: function (html) {
+      $('.new').html(html);
+    },
     showModal: function() {
       $(".popup").fadeIn(1000);
       this.attachHideModal();
@@ -67,6 +70,9 @@ $(document).ready(function() {
     },
     clearRadioBox: function() {
       $('.q').attr('checked', null);
+    },
+    appendErrorMessage: function() {
+      $('.popup h2').append(View.flanders_pissed);
     }
   };
 
@@ -102,53 +108,46 @@ $(document).ready(function() {
       // clears radio boxes after each question is answered
       View.clearRadioBox();
 
-      // if you want you can put this main game logic in a funtion and call it here.
       if (result === this.question.ans) {
         var html = View.correct_html;
         var music = "woohoo";
         Quiz.initialize(html,music);
         Model.rightAnswers++
         View.appendDonut();
-
         Quiz.checkForWin();
       } else if (isNaN(result)) {
         var html = View.warning_html;
         var music = "flanders";
         Quiz.initialize(html,music);
-        $('.popup h2').append(View.flanders_pissed);
+        View.appendErrorMessage();
       } else if (result != this.question.ans) {
         var html = View.wrong_html;
         var music = "doh";
         Quiz.initialize(html,music);
         Quiz.checkForWin();
         };
-      },
-      initialize: function(html, music) {
-        $('.new').html(html);
-        View.showModal();
-        Quiz.playMusic(music);
-      },
-      checkForWin: function () {
-        if (( Model.currentQuestion >= 5) && (Model.rightAnswers === 5)) {
-         Quiz.wonGame();
-       } else if (( Model.currentQuestion >= 5) && (Model.rightAnswers < 5)) {
-         Quiz.lostGame();
-       } else {
-        Quiz.askQuestion();
-       };
-      },
-      wonGame: function () {
-        $('.new').html(View.winner_html);
-        View.showModal();
-        View.appendDonut();
-        Quiz.playMusic('rich');
-        Model.gameWon = true;
-        Quiz.startGame();
-      },
-    lostGame: function () {
-      $('.new').html(View.loser_html);
+    },
+    initialize: function(html, music) {
+      View.setHTML(html);
       View.showModal();
-      Quiz.playMusic('meltdown');
+      Quiz.playMusic(music);
+    },
+    checkForWin: function () {
+      if (( Model.currentQuestion >= 5) && (Model.rightAnswers === 5)) {
+       Quiz.wonGame(View.winner_html, 'rich');
+     } else if (( Model.currentQuestion >= 5) && (Model.rightAnswers < 5)) {
+       Quiz.lostGame(View.loser_html, 'meltdown');
+     } else {
+      Quiz.askQuestion();
+     };
+    },
+    wonGame: function (html, music) {
+      Quiz.initialize(html, music);
+      Model.gameWon = true;
+      Quiz.startGame();
+    },
+    lostGame: function (html, music) {
+      Quiz.initialize(html, music)
       Quiz.startGame();
     },
     startGame: function () {
@@ -165,8 +164,7 @@ $(document).ready(function() {
   }
 
   // SHOW FIRST QUESTION AND ANSWERS
-    Quiz.askQuestion();  // initialize the view and controller
+    Quiz.askQuestion();
     View.attachClickHandler();
-
 });
 
