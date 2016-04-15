@@ -27,6 +27,7 @@ $(document).ready(function() {
     }
   ];
 
+  // View
   var View = {
     donut_gif: '<div class="donut"><img src="./images/donut-simpson.gif" alt="donut" style="width:120px;height:200px;"></img></div>',
     flanders_pissed: '<div class="flanders"><img src="./images/Nedpissed.gif" alt="flanders pissed" ></img>',
@@ -69,13 +70,14 @@ $(document).ready(function() {
     }
   };
 
+  // Model
   var Model = {
     rightAnswers: 0,
     currentQuestion: 0,
     gameWon: false
   };
 
-  // business logic
+  // Business logic
   var Quiz = {
     askQuestion: function() {
       // SETS question TO CURRENT QUESTION IN THE ARRAY OBJECT
@@ -97,29 +99,34 @@ $(document).ready(function() {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = parseInt($("input[type='radio']:checked").val(),10);
 
+      // clears radio boxes after each question is answered
       View.clearRadioBox();
 
       // if you want you can put this main game logic in a funtion and call it here.
       if (result === this.question.ans) {
-        // var html = "";
-        // var music = "";
-        $('.new').html(View.correct_html);
-        View.showModal();
+        var html = View.correct_html;
+        var music = "woohoo";
+        Quiz.initialize(html,music);
         Model.rightAnswers++
         View.appendDonut();
-        Quiz.playMusic('woohoo');
+
         Quiz.checkForWin();
       } else if (isNaN(result)) {
-        $('.new').html(View.warning_html);
-        View.showModal();
-        Quiz.playMusic('flanders');
+        var html = View.warning_html;
+        var music = "flanders";
+        Quiz.initialize(html,music);
         $('.popup h2').append(View.flanders_pissed);
       } else if (result != this.question.ans) {
-        $('.new').html(View.wrong_html);
-        View.showModal();
-        Quiz.playMusic('doh');
+        var html = View.wrong_html;
+        var music = "doh";
+        Quiz.initialize(html,music);
         Quiz.checkForWin();
         };
+      },
+      initialize: function(html, music) {
+        $('.new').html(html);
+        View.showModal();
+        Quiz.playMusic(music);
       },
       checkForWin: function () {
         if (( Model.currentQuestion >= 5) && (Model.rightAnswers === 5)) {

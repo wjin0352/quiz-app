@@ -67,9 +67,9 @@ div {
 
     }
 
-    form > input {
+  /*  form > input {
       padding-left: 20px;
-    }
+    }*/
 
   /* radio button section .input-choices */
     .input-choices {
@@ -79,19 +79,8 @@ div {
       margin-top: 15%;
     }
 
-    input {
-      display: inline-block;
-      padding-bottom: 2%;
-
-    }
-
-    input[type="radio"] {
-      margin-left: 44%;
-    }
-
     label {
       padding: 10% 0% 10% 2%;
-      display: block;
       font-size: 1.5em;
     }
 
