@@ -29,7 +29,7 @@ $(document).ready(function() {
 
   var View = {
     // CLICK EVENT FOR SUBMIT BUTTON
-    clickButton: function() {
+    attachClickHandler: function() {
       $('.btn').on('click', function(e){
         Quiz.getResults();
         e.preventDefault();
@@ -92,50 +92,76 @@ $(document).ready(function() {
       // INCREMENTS to make sure we get to the next object in the array
       Model.currentQuestion++;
     },
-
     getResults: function(e) {
       // GIVES NUMBER RESULT OF RADIO BOX CHECKED (0 INDEXED)
       var result = parseInt($("input[type='radio']:checked").val(),10);
 
       View.clearRadioBox();
 
-      if (Model.rightAnswers === 4) {
-        $('.new').html(Model.winner_html);
-        View.showModal();
-        View.appendDonut();
-        Quiz.playMusic('rich');
-        Model.gameWon = true;
-      } else if (result === this.question.ans) {
+      // if you want you can put this main game logic in a funtion and call it here.
+      if (result === this.question.ans) {
+        // var html = "";
+        // var music = "";
         $('.new').html(Model.correct_html);
         View.showModal();
         Model.rightAnswers++
         View.appendDonut();
         Quiz.playMusic('woohoo');
+        Quiz.checkForWin();
       } else if (isNaN(result)) {
         $('.new').html(Model.warning_html);
         View.showModal();
         Quiz.playMusic('flanders');
         $('.popup h2').append(Model.flanders_pissed);
-        e.preventDefault();
       } else if (result != this.question.ans) {
         $('.new').html(Model.wrong_html);
         View.showModal();
         Quiz.playMusic('doh');
+        Quiz.checkForWin();
       };
-      // asks the next question
-      console.log(Model.rightAnswers);
-      console.log(Model.currentQuestion);
-      if ((Model.currentQuestion === 5) && (Model.rightAnswers < 4)) {
-        Quiz.lostGame();
-      } else if (Model.gameWon == true) {
-        Quiz.startGame();
-      } else {
-        Quiz.askQuestion();
-      };
+
+
+       // else if ((Model.currentQuestion >= 5) && (Model.rightAnswers < 5)) {
+       //   Quiz.lostGame();
+       // };
+
+      // Final logic for win or lose, you can also create a function for this.
+      // if ((Model.currentQuestion === 6) && (Model.rightAnswers < 5)) {
+      //   Quiz.lostGame();
+        // return statement? to break?  we dont need to ask any more questions here.\
+
+      // if (Model.gameWon != true ) {
+      //     Quiz.askQuestion();
+      // };
       // this.gameWon == true ? this.startGame() : this.askQuestion();
-    },
+      // if (Model.rightAnswers === 5) {
+      //   $('.new').html(Model.winner_html);
+      //   View.showModal();
+      //   View.appendDonut();
+      //   Quiz.playMusic('rich');
+      //   Model.gameWon = true;
+      //   Quiz.startGame();
+      //   }
+
+      },
+      checkForWin: function () {
+        if (( Model.currentQuestion >= 5) && (Model.rightAnswers === 5)) {
+         Quiz.wonGame();
+       } else if (( Model.currentQuestion >= 5) && (Model.rightAnswers < 5)) {
+         Quiz.lostGame();
+       } else {
+        Quiz.askQuestion();
+       };
+      },
+      wonGame: function () {
+        $('.new').html(Model.winner_html);
+        View.showModal();
+        View.appendDonut();
+        Quiz.playMusic('rich');
+        Model.gameWon = true;
+        Quiz.startGame();
+      },
     lostGame: function () {
-      console.log('lost game!');
       $('.new').html(Model.loser_html);
       View.showModal();
       Quiz.playMusic('meltdown');
@@ -148,15 +174,15 @@ $(document).ready(function() {
       Quiz.askQuestion();
     },
     playMusic: function(id) {
-    $('#'+id)[0].volume = 0.5;
-    $('#'+id)[0].load();
-    $('#'+id)[0].play();
+      $('#'+id)[0].volume = 0.5;
+      $('#'+id)[0].load();
+      $('#'+id)[0].play();
     }
   }
 
   // SHOW FIRST QUESTION AND ANSWERS
-    Quiz.askQuestion();
-    View.clickButton();
+    Quiz.askQuestion();  // initialize the view and controller
+    View.attachClickHandler();
 
 });
 
