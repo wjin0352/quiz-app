@@ -17,10 +17,6 @@ body {
       clear: both;
     }
 
-div {
-  /*border: 0.01em solid grey;*/
-}
-
 /* Main section contents */
   .main-section {
     border: 0.01em solid blue;
@@ -30,223 +26,272 @@ div {
   }
 
   /* main section background */
-    .main-section {
-      background: url("./images/melt_down.jpg") no-repeat center center fixed;
-      background-size: cover;
-      /*background-size: 100% 100%;*/
-    }
+  .main-section {
+    background: url("./images/melt_down.jpg") no-repeat center center fixed;
+    background-size: cover;
+    /*background-size: 100% 100%;*/
+  }
 
   /* question section */
-    .question-section {
-      height: 62%;
-      width: 26%;
-      border: 0.3em solid black;
-      margin: 3%;
-      background-color: white;
-      border-radius: 15px;
-      position: relative;
-      /*top: 42%;*/
-      left: 1%;
-    }
+  .question-section {
+    height: 50%;
+    width: 30%;
+    border: 0.3em solid black;
+    margin: 3%;
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    /*top: 42%;*/
+    left: 1%;
+  }
 
-    hr {
-      height: 22px;
-      border-bottom: 3px solid black;
-      border-top: 0px;
-    }
+  hr {
+    height: 22px;
+    border-bottom: 3px solid black;
+    border-top: 0px;
+  }
 
-    .question-section p {
-      font-size: 2em;
-      font-weight: bolder;
-      margin: 5%;
-    }
+  .question-section p {
+    font-size: 2em;
+    font-weight: bolder;
+    margin: 5%;
+    text-align: center;
+  }
 
-    form {
-      display: inline-block;
-      margin:10% 20% 0% 40%;
-
-    }
+  form {
+    display: inline-block;
+  }
 
   /*  form > input {
-      padding-left: 20px;
-    }*/
+    padding-left: 20px;
+  }*/
 
   /* radio button section .input-choices */
-    .input-choices {
-      border-top: 0.01em solid grey;
-      height: 65%;
-      width: 100%;
-      margin-top: 15%;
-    }
+  .input-choices {
+    /*height: 65%;*/
+    width: 100%;
+    /*margin-top: 15%;*/
+    text-align: center;
+  }
 
-    label {
-      padding: 10% 0% 10% 2%;
-      font-size: 1.5em;
-    }
+  label {
+    padding:10px 0px;
+    font-size: 17px;
+  }
 
-    .btn {
-      display: block;
-    }
+  .btn {
+    display: block;
+  }
 
 
 
 
   /* popup modal */
-    /* Outer */
-    .popup {
-        width:100%;
-        height:100%;
-        display:none;
-        position:fixed;
-        top:0px;
-        left:0px;
-        background:rgba(0,0,0,0.5);
-    }
+  /* Outer */
+  .popup {
+      width:100%;
+      height:100%;
+      display:none;
+      position:fixed;
+      top:0px;
+      left:0px;
+      background:rgba(0,0,0,0.5);
+  }
 
-    /* Inner */
-    .popup-inner {
-      width:90%;
-      height: 80%;
-      padding:40px;
+  /* Inner */
+  .popup-inner {
+    width:90%;
+    height: 80%;
+    padding:40px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
+    background:#fff;
+    /*background-image: url("./images/homer_sloth.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+  }
+
+  /* Close Button */
+  .popup-close {
+      width:30px;
+      height:30px;
+      padding-top:4px;
+      display:inline-block;
       position:absolute;
-      top:50%;
-      left:50%;
-      -webkit-transform:translate(-50%, -50%);
-      transform:translate(-50%, -50%);
-      box-shadow:0px 2px 6px rgba(0,0,0,1);
-      border-radius:3px;
-      background:#fff;
-      /*background-image: url("./images/homer_sloth.jpg");*/
-      /*background-repeat: no-repeat;*/
-      /*background-size: cover;*/
-    }
+      top:0px;
+      right:0px;
+      transition:ease 0.25s all;
+      -webkit-transform:translate(50%, -50%);
+      transform:translate(50%, -50%);
+      border-radius:1000px;
+      background:rgba(0,0,0,0.8);
+      font-family:Arial, Sans-Serif;
+      font-size:20px;
+      text-align:center;
+      line-height:100%;
+      color:#fff;
+  }
 
-    /* Close Button */
-    .popup-close {
-        width:30px;
-        height:30px;
-        padding-top:4px;
-        display:inline-block;
-        position:absolute;
-        top:0px;
-        right:0px;
-        transition:ease 0.25s all;
-        -webkit-transform:translate(50%, -50%);
-        transform:translate(50%, -50%);
-        border-radius:1000px;
-        background:rgba(0,0,0,0.8);
-        font-family:Arial, Sans-Serif;
-        font-size:20px;
-        text-align:center;
-        line-height:100%;
-        color:#fff;
-    }
+  .popup-close:hover {
+      -webkit-transform:translate(50%, -50%) rotate(180deg);
+      transform:translate(50%, -50%) rotate(180deg);
+      background:rgba(0,0,0,1);
+      text-decoration:none;
+  }
 
-    .popup-close:hover {
-        -webkit-transform:translate(50%, -50%) rotate(180deg);
-        transform:translate(50%, -50%) rotate(180deg);
-        background:rgba(0,0,0,1);
-        text-decoration:none;
-    }
+   .popup-correct, .popup-incorrect {
+    width: 60%;
+    height: 80%;
+    padding:40px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
+    background:#fff;
+    text-align: center;
+    /*background-image: url("./images/homer_sloth.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+  }
 
-     .popup-correct, .popup-incorrect {
-      width:50%;
-      height:50%;
-      padding:40px;
-      position:absolute;
-      top:50%;
-      left:50%;
-      -webkit-transform:translate(-50%, -50%);
-      transform:translate(-50%, -50%);
-      box-shadow:0px 2px 6px rgba(0,0,0,1);
-      border-radius:3px;
-      background:#fff;
-      /*background-image: url("./images/homer_sloth.jpg");*/
-      /*background-repeat: no-repeat;*/
-      /*background-size: cover;*/
-    }
+  .popup-incorrect {
+    height: 40%;
+  }
 
-    .popup-winner {
-      width:90%;
-      height:90%;
-      padding:40px;
-      position:absolute;
-      top:50%;
-      left:50%;
-      -webkit-transform:translate(-50%, -50%);
-      transform:translate(-50%, -50%);
-      box-shadow:0px 2px 6px rgba(0,0,0,1);
-      border-radius:3px;
+  .popup-winner {
+    width:90%;
+    height:90%;
+    padding: 20em;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
 
-      background-image: url('./images/the-simpsons.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+    background-image: url('./images/the-simpsons.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-    .popup-winner h2, .popup-loser h2 {
-      font-size: 3em;
-      background-color: white;
-      margin: 0 auto;
-      width: 350px;
-      border-radius: 8px;
-      border: 0.01em solid grey;
-    }
+  .popup-winner h2, .popup-loser h2 {
+    font-size: 3em;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 8px;
+    text-align: center;
+    padding: .5em;
+  }
 
+  .popup-winner a#closer, .popup-loser a#closer {
+    font-size: 2em;
+    margin: 2% auto;
+    display: block;
+    background-color: white;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .popup-loser {
+    width:90%;
+    height:90%;
+    padding:40px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
+    background-color: #fff;
+    background-image: url('./images/lose.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .popup-prompt {
+    width:50%;
+    height:50%;
+    padding:40px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
+    background:#fff;
+  }
+
+  .flanders {
+    position:absolute;
+  }
+
+  div.donut {
+    display: inline-block;
+    padding: 0 20px 0 20px;
+  }
+
+  div.popup {
+    display: none;
+  }
+
+  .winner_items {
+    background-color: white;
+    width: 200px;
+    height: 120px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  @media only screen and (max-width : 750px) {
     .popup-winner a#closer, .popup-loser a#closer {
-      font-size: 3em;
-      margin: 2% auto;
-      width: 6%;
-      display: block;
-      background-color: white;
-      border-radius: 12px;
-      border: 0.01em solid grey;
-    }
-
-    .popup-loser {
-      width:90%;
-      height:90%;
-      padding:40px;
-      position:absolute;
-      top:50%;
-      left:50%;
-      -webkit-transform:translate(-50%, -50%);
-      transform:translate(-50%, -50%);
-      box-shadow:0px 2px 6px rgba(0,0,0,1);
-      border-radius:3px;
-      background-color: #fff;
-      background-image: url('./images/lose.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    .popup-prompt {
-      width:50%;
-      height:50%;
-      padding:40px;
-      position:absolute;
-      top:50%;
-      left:50%;
-      -webkit-transform:translate(-50%, -50%);
-      transform:translate(-50%, -50%);
-      box-shadow:0px 2px 6px rgba(0,0,0,1);
-      border-radius:3px;
-      background:#fff;
-    }
-
-    .btn-warning {
+      width: 100px;
 
     }
+  }
 
-    .flanders {
-      position:absolute;
+  @media only screen and (max-width: 850px) {
+    .question-section p {
+      font-size: 1.5em;
     }
 
-    div.donut {
-      display: inline-block;
-      padding: 0 20px 0 20px;
+    label {
+      padding: 2px 0px;
+      font-size: 20px;
     }
 
-  /* hides the html i append to the div.new on bottom of html, but allows me to grab it and change html for modal  */
-    div.popup {
-      display: none;
+    .popup h2 {
+      font-size: 20px;
     }
+
+    .question-section {
+      height: 40%;
+      width: 50%;
+    }
+
+    .popup-correct, .popup-incorrect {
+      height: 80%
+    }
+  }
+
+  @media only screen and (max-width: 667px) {
+    .popup-correct, .popup-incorrect {
+      height: 90%;
+      width: 80%;
+      overflow-x: auto;
+    }
+
+    .popup-close {
+      position: fixed;
+    }
+  }

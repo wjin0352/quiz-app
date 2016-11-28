@@ -49,7 +49,7 @@ $(document).ready(function(){
     this.correct_html = '<div class="popup" data-popup="popup-1"><div class="popup-correct"><h2>Good job, that is correct!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>';
     this.wrong_html = '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Sorry that is incorrect!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>';
     this.warning_html = '<div class="popup" data-popup="popup-1"><div class="popup-incorrect"><h2>Please click on one of the choices!</h2><p><a data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>';
-    this.winner_html = '<div class="popup" data-popup="popup-1"><div class="popup-winner"><h2>Congrats you won!!!</h2><p><a id="closer" data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>';
+    this.winner_html = '<div class="popup" data-popup="popup-1"><div class="popup-winner"><div class="winner_items"><h2>Congrats you won!!!</h2><p><a id="closer" data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div></div>';
     this.loser_html = '<div class="popup" data-popup="popup-1"><div class="popup-loser"><h2>Sorry you lost.</h2><p><a id="closer" data-popup-close="popup-1" href="#">Close</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>';
     this.prompt_html = '<div class="popup" data-popup="popup-1"><div class="popup-prompt"><h2>play again?</h2><p><a type="button" class="btn btn-lrg btn-warning">OK</a></p><a class="popup-close" data-popup-close="popup-1" href="#">x</a></div></div>';
   };
@@ -244,5 +244,6 @@ $(document).ready(function(){
   ];
 
   questionArray = questionArray.map(function(question) {
-    return new MultipleChoiceQuestion(question.q, question.choices, question.ans);
-  });
+    return new MultipleChoiceQuestion(question.q, question.choices, question.ans)
+  })
+});
