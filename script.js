@@ -199,10 +199,6 @@ $(document).ready(function(){
     viewObject.attachClickHandler();
 });
 
-
-
-
-
 $(document).ready(function(){
 
   var MultipleChoiceQuestion = function(q, choices, ans) {
